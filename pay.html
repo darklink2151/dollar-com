@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="$.com — Pay with crypto.">
+    <title>Pay | $.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo"><img src="./img/logo.svg" alt="$.com" class="logo-img">$.com</a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="download.html">Products</a>
+            <a href="pay.html">Pay</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="pay-section">
+            <h1>Pay</h1>
+            <p class="pay-intro">Send BTC, ETH, or USDC to the address below. Funds are credited to your account.</p>
+            <div class="order-summary" id="order-summary" style="display:none;"></div>
+            <div id="download-area" class="download-area" style="display:none;"></div>
+            <div id="crypto-addresses" class="crypto-addresses">
+                <div class="loading" id="loading">Loading…</div>
+                <div class="address-list" id="address-list" style="display:none;"></div>
+                <div class="error" id="error" style="display:none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 $.com. Self-hosted. Zero dependencies.</p>
+        <p class="disclaimer">Fictional products for demonstration. No real data sold.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

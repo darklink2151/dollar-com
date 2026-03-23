@@ -23,14 +23,14 @@ Open http://localhost:8000 — frontend + `/api/crypto/deposit-addresses`
 
 ## Live on DigitalOcean
 
-- **URL:** http://64.227.11.50:8080
+- **URL:** http://64.227.11.50
 - **Cost:** ~\$4/mo (s-1vcpu-512mb-10gb droplet)
-- **Kraken:** Uses your real deposit addresses from env vars
+- **Stack:** nginx (port 80) → Node (8080), Kraken API dynamic
+- **Kraken:** Live addresses from your account, no fallback
 
-## Features (log-store aesthetic)
+## Features (log-store style)
 
-- **Products**: Fake items for sale (Starter $29, Pro $99, Enterprise $499, S3 Connector $49)
+- **Multi-page**: Home, Download, Pay — like log-store.com
+- **Images**: Hero, feature blocks, product cards with photos
 - Schemaless, Parse with Python, Self-Hosted, Zero-Dependencies
-- Dark, minimal, JetBrains Mono
-- Dynamic Kraken deposit addresses — crypto sent goes to your Kraken
-- QR codes + Copy address
+- Pay page: deposit addresses only (funds go to your account)

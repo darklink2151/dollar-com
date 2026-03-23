@@ -1,0 +1,50 @@
+[
+  {
+    "id": "exec-plat",
+    "name": "Platinum Executive",
+    "desc": "Amex/Chase tier. $2,500+ guaranteed balance. Executives, analysts.",
+    "price": 350,
+    "img": "product1.jpg",
+    "tag": "Bestseller"
+  },
+  {
+    "id": "black-tier",
+    "name": "Black Card Tier",
+    "desc": "Centurion-grade. $10,000+ guaranteed. C-suite, hedge fund.",
+    "price": 750,
+    "img": "product2.jpg",
+    "tag": "Premium"
+  },
+  {
+    "id": "ws-corp",
+    "name": "Wall Street Corporate",
+    "desc": "IB/corporate. $25,000+ guaranteed. Trading desks, PE.",
+    "price": 1200,
+    "img": "product3.jpg",
+    "tag": "High limit"
+  },
+  {
+    "id": "gold-private",
+    "name": "Gold Private Banking",
+    "desc": "Private bank tier. $50,000+ guaranteed. Family office.",
+    "price": 2500,
+    "img": "product4.jpg",
+    "tag": "VIP"
+  },
+  {
+    "id": "cash-app-full",
+    "name": "Cash App Full Pack",
+    "desc": "Complete logs. 50k rows. Verified balances.",
+    "price": 499,
+    "img": "product1.jpg",
+    "tag": "Data"
+  },
+  {
+    "id": "api-audit",
+    "name": "API Audit Trail",
+    "desc": "Bank/FinTech REST logs. Auth, transfers, settlements.",
+    "price": 899,
+    "img": "product2.jpg",
+    "tag": "Data"
+  }
+]

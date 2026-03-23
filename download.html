@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="$.com — Executive tier. Cards and data.">
+    <title>Products | $.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo"><img src="./img/logo.svg" alt="$.com" class="logo-img">$.com</a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="download.html">Products</a>
+            <a href="pay.html">Pay</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <h1>Products</h1>
+            <p class="tagline">Executive tier. Verified. Guaranteed balances.</p>
+        </section>
+
+        <section class="products" id="products">
+            <div class="product-grid" id="product-grid">
+                <div class="loading-products">Loading…</div>
+            </div>
+        </section>
+
+        <section class="trust-section">
+            <h2>Why $.com</h2>
+            <div class="trust-grid">
+                <div class="trust-item">Verified balances</div>
+                <div class="trust-item">Instant delivery</div>
+                <div class="trust-item">Crypto only</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 $.com. Self-hosted. Zero dependencies.</p>
+        <p class="disclaimer">Fictional products for demonstration. No real data sold.</p>
+    </footer>
+
+    <script>
+      (async () => {
+        const grid = document.getElementById('product-grid');
+        try {
+          const res = await fetch('/api/products');
+          const products = await res.json();
+          if (!Array.isArray(products) || products.length === 0) {
+            grid.innerHTML = '<p class="no-products">No products. Add data/products.json</p>';
+            return;
+          }
+          grid.innerHTML = products.map(p => `
+            <div class="product-card">
+              ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
+              <img src="./img/${p.img || 'product1.jpg'}" alt="${p.name}">
+              <h3>${p.name}</h3>
+              <p class="product-desc">${p.desc}</p>
+              <span class="price">$${p.price.toLocaleString()}</span>
+              <a href="pay.html?product=${encodeURIComponent(p.name)}&price=${p.price}" class="buy-btn">Buy now</a>
+            </div>
+          `).join('');
+        } catch (e) {
+          grid.innerHTML = '<p class="no-products">Failed to load products.</p>';
+        }
+      })();
+    </script>
+</body>
+</html>

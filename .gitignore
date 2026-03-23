@@ -4,6 +4,7 @@ node_modules
 *.log
 backend/node_modules
 backend/.env
+data
 .cursor
 .agdirectives
 app-spec.yaml

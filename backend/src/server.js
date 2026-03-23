@@ -1,30 +1,150 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const { getDepositAddresses } = require('./kraken-deposits');
+const path = require('path');
+const { createOrder, getOrder, markOrderPaid, getPendingOrders } = require('./orders');
+const kraken = require('./kraken-service');
 require('dotenv').config();
 
-const path = require('path');
 const app = express();
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(express.json());
 
-// Serve frontend
 app.use(express.static(path.join(__dirname, '../..')));
 
-// Kraken deposit addresses — dynamic, live from API
-app.get('/api/crypto/deposit-addresses', async (req, res) => {
+/** Products catalog */
+const productsPath = path.join(__dirname, '../../data/products.json');
+function getProducts() {
   try {
-    const addresses = await getDepositAddresses();
-    res.json(addresses);
+    return JSON.parse(require('fs').readFileSync(productsPath, 'utf8'));
+  } catch { return []; }
+}
+app.get('/api/products', (req, res) => res.json(getProducts()));
+
+/** Create order, return id + addresses + expected amounts */
+app.post('/api/orders', async (req, res) => {
+  try {
+    const { product, price } = req.body || {};
+    const priceUsd = parseFloat(price) || 0;
+    if (!product || priceUsd <= 0) {
+      return res.status(400).json({ error: 'product and price required' });
+    }
+    const [addresses, expected] = await Promise.all([
+      kraken.getDepositAddresses(),
+      kraken.getExpectedAmounts(priceUsd)
+    ]);
+    const order = createOrder(product, priceUsd, addresses, expected);
+    const network = { btc: addresses.btc?.network || 'Bitcoin', eth: addresses.eth?.network || 'Ethereum', usdc: addresses.usdc?.network || 'USDC' };
+    res.json({
+      id: order.id,
+      product: order.product,
+      price_usd: order.price_usd,
+      status: order.status,
+      addresses: order.addresses,
+      expected,
+      network
+    });
   } catch (err) {
-    console.error('[Kraken]', err);
-    res.status(500).json({ error: err.message || 'Failed to fetch deposit addresses' });
+    console.error('[orders]', err);
+    res.status(500).json({ error: err.message || 'Order failed' });
   }
 });
 
+/** Get order status */
+app.get('/api/orders/:id', (req, res) => {
+  const order = getOrder(req.params.id);
+  if (!order) return res.status(404).json({ error: 'Order not found' });
+  res.json({
+    id: order.id,
+    product: order.product,
+    price_usd: order.price_usd,
+    status: order.status,
+    addresses: order.addresses,
+    expected: order.expected,
+    network: order.addresses ? {
+      btc: 'Bitcoin',
+      eth: 'Ethereum',
+      usdc: 'USDC'
+    } : null,
+    paid_at: order.paid_at
+  });
+});
+
+/** Download product when paid */
+app.get('/api/orders/:id/download', (req, res) => {
+  const order = getOrder(req.params.id);
+  if (!order) return res.status(404).json({ error: 'Order not found' });
+  if (order.status !== 'paid') {
+    return res.status(402).json({ error: 'Payment required', status: order.status });
+  }
+  const product = order.product || 'Logs';
+  const lines = [
+    `# ${product} - $.com`,
+    `# Order: ${order.id}`,
+    `# Generated: ${new Date().toISOString()}`,
+    '',
+    ...Array.from({ length: 50 }, (_, i) => {
+      const ts = new Date(Date.now() - i * 60000).toISOString();
+      const level = ['INFO', 'WARN', 'DEBUG'][i % 3];
+      const msg = `log entry ${1000 + i} ${level.toLowerCase()}`;
+      return `${ts}\t${level}\t${msg}\t{"row":${i}}`;
+    })
+  ];
+  const body = lines.join('\n');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Content-Disposition', `attachment; filename="${product.replace(/\s+/g, '-')}-${order.id}.log"`);
+  res.send(body);
+});
+
+/** Legacy: shared addresses (for pay without order) */
+app.get('/api/crypto/deposit-addresses', async (req, res) => {
+  try {
+    const addresses = await kraken.getDepositAddresses();
+    const out = {
+      btc: addresses.btc,
+      eth: addresses.eth,
+      usdc: addresses.usdc,
+      error: null
+    };
+    res.json(out);
+  } catch (err) {
+    console.error('[Kraken]', err);
+    res.status(500).json({ error: err.message || 'Failed' });
+  }
+});
+
+/** Poll deposits, match to orders, mark paid */
+async function pollDeposits() {
+  try {
+    const deposits = await kraken.getRecentDeposits();
+    const pending = getPendingOrders();
+    for (const dep of deposits) {
+      const amt = parseFloat(dep.amount);
+      const asset = (dep.asset || '').toUpperCase().replace('XBT', 'BTC');
+      const refid = dep.refid || dep.txid;
+      for (const ord of pending) {
+        const exp = ord.expected || {};
+        const key = asset === 'BTC' ? 'btc' : asset === 'ETH' ? 'eth' : asset === 'USDC' ? 'usdc' : null;
+        if (!key || !exp[key]) continue;
+        const expVal = parseFloat(exp[key]);
+        const tol = Math.max(expVal * 0.01, 0.00000001);
+        if (Math.abs(amt - expVal) <= tol) {
+          markOrderPaid(ord.id, refid);
+          console.log(`[deposit] Order ${ord.id} marked paid (${amt} ${asset})`);
+          break;
+        }
+      }
+    }
+  } catch (e) {
+    console.error('[deposit poll]', e.message);
+  }
+}
+
+setInterval(pollDeposits, 60000);
+pollDeposits();
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`[$.com] Financial Gateway listening securely on port ${PORT}`);
+  console.log(`[$.com] Listening on port ${PORT}`);
 });

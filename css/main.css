@@ -36,10 +36,18 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-weight: 600;
     font-size: 1.25rem;
     color: var(--accent);
+    text-decoration: none;
 }
+
+.logo:hover { color: var(--accent); opacity: 0.9; }
+
+.logo-img { width: 28px; height: 28px; }
 
 .nav {
     display: flex;
@@ -55,10 +63,25 @@ body {
 
 /* Hero */
 .hero {
-    padding: 4rem 2rem;
+    padding: 2rem;
     text-align: center;
-    max-width: 720px;
+    max-width: 960px;
     margin: 0 auto;
+}
+
+.hero-image {
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
 }
 
 .hero h1 {
@@ -72,6 +95,21 @@ body {
     font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 2rem;
+}
+
+.page-hero {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.cta-section {
+    padding: 3rem 2rem;
+    text-align: center;
 }
 
 .cta {
@@ -108,14 +146,46 @@ body {
     gap: 1.5rem;
 }
 
+.product-tag {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 4px;
+    font-weight: 500;
+}
+
 .product-card {
-    padding: 1.5rem;
+    position: relative;
+    padding: 0;
     border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--bg-secondary);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
+
+.product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-card h3,
+.product-card .product-desc,
+.product-card .price,
+.product-card .buy-btn {
+    padding: 0 1.25rem;
+}
+
+.product-card .product-desc { padding-top: 0.5rem; }
+.product-card .price { padding-top: 0.5rem; padding-bottom: 1rem; }
+.product-card .buy-btn { margin: 0 1.25rem 1.25rem; }
 
 .product-card h3 {
     font-size: 1.1rem;
@@ -164,6 +234,27 @@ body {
     font-size: 0.95rem;
 }
 
+.expected-amount {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.download-area {
+    margin-bottom: 1.5rem;
+}
+
+.paid-banner {
+    padding: 1.5rem;
+    background: rgba(63, 185, 80, 0.15);
+    border: 1px solid var(--accent-green);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.paid-banner strong { display: block; margin-bottom: 1rem; color: var(--accent-green); }
+.download-btn { display: inline-block; margin-top: 0.5rem; }
+
 /* Features — log-store style blocks */
 .features {
     padding: 3rem 2rem;
@@ -184,11 +275,25 @@ body {
 }
 
 .feature {
-    padding: 1.25rem;
+    padding: 0;
     border: 1px solid var(--border);
     border-radius: 6px;
     background: var(--bg-secondary);
+    overflow: hidden;
 }
+
+.feature img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+
+.feature h3, .feature p {
+    padding: 1rem 1.25rem;
+}
+
+.feature p { padding-top: 0; }
 
 .feature h3 {
     font-size: 1rem;
@@ -207,6 +312,12 @@ body {
     padding: 3rem 2rem;
     max-width: 720px;
     margin: 0 auto;
+}
+
+.pay-section h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
 }
 
 .pay-intro {
@@ -282,13 +393,6 @@ body {
   flex-wrap: wrap;
 }
 
-.kraken-link {
-  font-size: 0.8rem;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.kraken-link:hover { text-decoration: underline; }
 
 /* Footer */
 .site-footer {
