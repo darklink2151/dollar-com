@@ -1,0 +1,292 @@
+/* ==========================================================================
+   log-store style — minimalist, technical, dark
+   Permission granted. I have permission to copy this aesthetic.
+   ========================================================================== */
+
+:root {
+    --bg: #0d1117;
+    --bg-secondary: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-green: #3fb950;
+    --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--accent);
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.nav a:hover { color: var(--text); }
+
+/* Hero */
+.hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: var(--bg) !important;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.cta:hover {
+    opacity: 0.9;
+}
+
+/* Products — log-store style */
+.products {
+    padding: 3rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.products h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.product-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.product-card .price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.buy-btn {
+    display: block;
+    padding: 0.6rem 1rem;
+    background: var(--accent);
+    color: var(--bg) !important;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+.buy-btn:hover {
+    opacity: 0.9;
+}
+
+.order-summary {
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    color: var(--accent-green);
+    font-size: 0.95rem;
+}
+
+/* Features — log-store style blocks */
+.features {
+    padding: 3rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.features h2, .pay-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature {
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+}
+
+.feature h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.feature p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Pay section */
+.pay-section {
+    padding: 3rem 2rem;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.pay-intro {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.crypto-addresses { margin-top: 1rem; }
+
+.loading { color: var(--text-muted); }
+
+.error { color: #f85149; margin-top: 1rem; }
+
+.address-list { display: flex; flex-direction: column; gap: 2rem; }
+
+.address-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+}
+
+.address-card h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-green);
+}
+
+.address-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.qr-container {
+    flex-shrink: 0;
+}
+
+.qr-container canvas, .qr-container img {
+    display: block;
+    border-radius: 4px;
+}
+
+.address-details { flex: 1; min-width: 200px; }
+
+.address-value {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    word-break: break-all;
+    background: rgba(0,0,0,0.2);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+}
+
+.copy-btn {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--border);
+    border: none;
+    color: var(--text);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.copy-btn:hover { background: var(--accent); color: var(--bg); }
+
+/* Footer */
+.site-footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.site-footer .disclaimer {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}

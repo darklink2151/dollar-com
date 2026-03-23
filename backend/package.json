@@ -1,0 +1,20 @@
+{
+  "name": "dollar_com_backend",
+  "version": "1.0.0",
+  "description": "Secure Financial Server for $.com",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "node-kraken-api": "^2.2.2",
+    "pg": "^8.11.3",
+    "redis": "^4.6.10",
+    "uuid": "^9.0.1"
+  }
+}

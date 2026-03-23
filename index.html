@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="$.com — Take the aaS out of SaaS. Schemaless. Self-hosted. Zero dependencies. Accept crypto.">
+    <title>$.com | log-store</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">$.com</div>
+        <nav class="nav">
+            <a href="#products">Products</a>
+            <a href="#features">Features</a>
+            <a href="#pay">Pay</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Take the aaS out of SaaS</h1>
+            <p class="tagline">Schemaless. Self-hosted. Zero dependencies. Accept crypto.</p>
+            <a href="#pay" class="cta">Pay with crypto today</a>
+        </section>
+
+        <section class="products" id="products">
+            <h2>Products</h2>
+            <div class="product-grid">
+                <div class="product-card" data-id="cashapp" data-price="49">
+                    <h3>Cash App Logs</h3>
+                    <p class="product-desc">Transaction logs. 10k rows. JSON. Schemaless.</p>
+                    <span class="price">$49</span>
+                    <a href="#pay" class="buy-btn" data-product="Cash App Logs" data-price="49">Buy with crypto</a>
+                </div>
+                <div class="product-card" data-id="api-access" data-price="29">
+                    <h3>API Access Logs</h3>
+                    <p class="product-desc">REST API audit trail. IP, path, status codes.</p>
+                    <span class="price">$29</span>
+                    <a href="#pay" class="buy-btn" data-product="API Access Logs" data-price="29">Buy with crypto</a>
+                </div>
+                <div class="product-card" data-id="auth-firewall" data-price="79">
+                    <h3>Auth & Firewall Logs</h3>
+                    <p class="product-desc">Auth events, block/allow. Parse with Python.</p>
+                    <span class="price">$79</span>
+                    <a href="#pay" class="buy-btn" data-product="Auth & Firewall Logs" data-price="79">Buy with crypto</a>
+                </div>
+                <div class="product-card" data-id="webserver" data-price="39">
+                    <h3>Web Server Logs</h3>
+                    <p class="product-desc">Nginx/apache access logs. Common format.</p>
+                    <span class="price">$39</span>
+                    <a href="#pay" class="buy-btn" data-product="Web Server Logs" data-price="39">Buy with crypto</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Schemaless</h3>
+                    <p>Flexible data. No rigid structure. Adapt on the fly.</p>
+                </div>
+                <div class="feature">
+                    <h3>Parse with Python</h3>
+                    <p>Transform and query at search time. Full power.</p>
+                </div>
+                <div class="feature">
+                    <h3>Self-Hosted</h3>
+                    <p>Your data, your infra. No vendor lock-in.</p>
+                </div>
+                <div class="feature">
+                    <h3>Zero-Dependencies</h3>
+                    <p>Standalone binary. No external databases.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pay-section" id="pay">
+            <h2>Pay with crypto</h2>
+            <p class="pay-intro">Send BTC, ETH, or USDC to your Kraken deposit addresses. Funds arrive directly.</p>
+            <div class="order-summary" id="order-summary" style="display:none;">
+                <span id="order-product"></span> — <span id="order-price"></span>
+            </div>
+            
+            <div id="crypto-addresses" class="crypto-addresses">
+                <div class="loading" id="loading">Loading addresses…</div>
+                <div class="address-list" id="address-list" style="display:none;"></div>
+                <div class="error" id="error" style="display:none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 $.com. Self-hosted. Zero dependencies.</p>
+        <p class="disclaimer">Fictional products for demonstration. No real data sold.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
