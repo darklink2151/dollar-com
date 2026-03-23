@@ -6,3 +6,4 @@ backend/node_modules
 backend/.env
 .cursor
 .agdirectives
+app-spec.yaml

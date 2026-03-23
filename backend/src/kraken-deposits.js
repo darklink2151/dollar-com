@@ -42,10 +42,7 @@ async function getDepositAddresses() {
   const results = { btc: null, eth: null, usdc: null, error: null };
   
   if (!creds?.key || !creds?.secret) {
-    // Fallback for seamless UI testing when keys are missing
-    results.btc = { address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh", network: "Bitcoin", asset: "BTC" };
-    results.eth = { address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F", network: "Ethereum", asset: "ETH" };
-    results.usdc = { address: "0x71C7656EC7ab88b098defB751B7401B5f6d8976F", network: "ERC20", asset: "USDC" };
+    results.error = 'KRAKEN_API_KEY and KRAKEN_API_SECRET required. Set in .env or env vars.';
     return results;
   }
 

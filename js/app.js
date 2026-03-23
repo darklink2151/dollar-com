@@ -2,10 +2,9 @@
  * $.com — log-store style. Fetches Kraken deposit addresses, displays QR codes.
  * Products: fake items for sale, pay with crypto to Kraken.
  */
-const API_BASE = ''; // same origin when served by backend on :8000
-
 async function fetchAddresses() {
-  const url = `${API_BASE}/api/crypto/deposit-addresses`;
+  const base = typeof window !== 'undefined' ? window.location.origin : '';
+  const url = `${base}/api/crypto/deposit-addresses`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(await res.text() || res.statusText);
   return res.json();
@@ -56,16 +55,22 @@ async function init() {
       return;
     }
 
+    const krakenUrl = 'https://www.kraken.com/sign-in';
     listEl.innerHTML = items.map(([key, info]) => {
       const qrId = `qr-${key}`;
+      const addr = info.address || '';
+      const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] || c);
       return `
         <div class="address-card">
-          <h4>${info.asset} (${info.network})</h4>
+          <h4>${esc(info.asset)} (${esc(info.network || key)})</h4>
           <div class="address-row">
             <div class="qr-container" id="${qrId}"></div>
             <div class="address-details">
-              <div class="address-value">${info.address}</div>
-              <button class="copy-btn" data-addr="${info.address}">Copy address</button>
+              <div class="address-value">${esc(addr)}</div>
+              <div class="address-actions">
+                <button class="copy-btn" data-addr="${esc(addr)}">Copy</button>
+                <a href="${krakenUrl}" target="_blank" rel="noopener" class="kraken-link">Open Kraken</a>
+              </div>
             </div>
           </div>
         </div>

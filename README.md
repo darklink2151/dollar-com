@@ -21,6 +21,12 @@ npm start
 
 Open http://localhost:8000 — frontend + `/api/crypto/deposit-addresses`
 
+## Live on DigitalOcean
+
+- **URL:** http://64.227.11.50:8080
+- **Cost:** ~\$4/mo (s-1vcpu-512mb-10gb droplet)
+- **Kraken:** Uses your real deposit addresses from env vars
+
 ## Features (log-store aesthetic)
 
 - **Products**: Fake items for sale (Starter $29, Pro $99, Enterprise $499, S3 Connector $49)

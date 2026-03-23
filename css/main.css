@@ -276,6 +276,20 @@ body {
 
 .copy-btn:hover { background: var(--accent); color: var(--bg); }
 
+.address-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.kraken-link {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.kraken-link:hover { text-decoration: underline; }
+
 /* Footer */
 .site-footer {
     padding: 2rem;
