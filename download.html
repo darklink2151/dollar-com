@@ -55,28 +55,38 @@
     </footer>
 
     <script>
-      (async () => {
-        const grid = document.getElementById('product-grid');
-        try {
-          const res = await fetch('/api/products');
-          const products = await res.json();
-          if (!Array.isArray(products) || products.length === 0) {
-            grid.innerHTML = '<p class="no-products">No products. Add data/products.json</p>';
-            return;
-          }
-          grid.innerHTML = products.map(p => `
-            <div class="product-card">
-              ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
-              <img src="./img/${p.img || 'product1.jpg'}" alt="${p.name}">
-              <h3>${p.name}</h3>
-              <p class="product-desc">${p.desc}</p>
-              <span class="price">$${p.price.toLocaleString()}</span>
-              <a href="pay.html?product=${encodeURIComponent(p.name)}&price=${p.price}" class="buy-btn">Buy now</a>
-            </div>
-          `).join('');
-        } catch (e) {
-          grid.innerHTML = '<p class="no-products">Failed to load products.</p>';
+      (function () {
+        function esc(s) {
+          return String(s ?? '').replace(/[&<>"']/g, function (c) {
+            return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] || c;
+          });
         }
+        (async () => {
+          const grid = document.getElementById('product-grid');
+          try {
+            const res = await fetch('/api/products');
+            const products = await res.json();
+            if (!Array.isArray(products) || products.length === 0) {
+              grid.innerHTML = '<p class="no-products">No products. Add data/products.json</p>';
+              return;
+            }
+            grid.innerHTML = products.map(function (p) {
+              const img = String(p.img || 'product1.jpg').replace(/[^a-zA-Z0-9._-]/g, '');
+              return (
+                '<div class="product-card">' +
+                (p.tag ? '<span class="product-tag">' + esc(p.tag) + '</span>' : '') +
+                '<img src="./img/' + esc(img) + '" alt="' + esc(p.name) + '" loading="lazy" width="400" height="160">' +
+                '<h3>' + esc(p.name) + '</h3>' +
+                '<p class="product-desc">' + esc(p.desc) + '</p>' +
+                '<span class="price">$' + Number(p.price).toLocaleString() + '</span>' +
+                '<a href="pay.html?product=' + encodeURIComponent(p.name) + '&price=' + encodeURIComponent(p.price) + '" class="buy-btn">Buy now</a>' +
+                '</div>'
+              );
+            }).join('');
+          } catch (e) {
+            grid.innerHTML = '<p class="no-products">Failed to load products.</p>';
+          }
+        })();
       })();
     </script>
 </body>
