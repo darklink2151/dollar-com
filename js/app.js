@@ -1,5 +1,5 @@
 /**
- * $.com Pay page — create order, show addresses, poll for payment, deliver download
+ * QuantumShade Pay page — create order, show addresses, poll for payment, deliver download
  */
 const API = typeof window !== 'undefined' ? window.location.origin : '';
 

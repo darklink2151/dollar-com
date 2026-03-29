@@ -3,91 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="$.com — Executive Tier Products. Verified balances.">
-    <title>Products | $.com</title>
-    
-    <!-- Social Meta Tags -->
-    <meta property="og:title" content="Products | $.com Executive Tier">
-    <meta property="og:description" content="Verified balances $2.5k - $50k+. Best-in-class data logs.">
-    <meta property="og:image" content="http://64.227.11.50/img/og-preview.jpg">
-    <meta property="twitter:card" content="summary_large_image">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="QuantumShade — Browse verified bank logs and high-volume data packs.">
+    <title>Products | QuantumShade</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <header class="site-header">
-        <a href="index.html" class="logo"><img src="./img/logo.svg" alt="$.com" class="logo-img">$.com</a>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="download.html">Products</a>
-            <a href="pay.html">Pay</a>
+    <div class="top-bar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="brand">QuantumShade</a>
+            <div class="user-status">
+                <div class="status-item"><span class="label">Balance:</span> <span class="value">$0.00</span></div>
+                <a href="#" class="topup-btn">Top Up</a>
+                <a href="#" class="status-item"><span class="value">Orders</span></a>
+                <div class="status-item"><span class="value">dirtbag</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="nav-menu">
+            <a href="download.html?cat=canada" class="nav-link">CANADA BANKS 🇨🇦</a>
+            <a href="download.html?cat=usa" class="nav-link active">USA BANKS 🇺🇸</a>
+            <a href="download.html?cat=europe" class="nav-link">EUROPEAN BANKS 🇪🇺🌍</a>
+            <a href="#" class="nav-link">SHOPWITHSCRIP LOGS 🟦🛒</a>
+            <a href="#" class="nav-link">OTHER TOOLS ✒️🖋️</a>
         </nav>
-    </header>
 
-    <main>
-        <section class="page-hero">
-            <h1>Products</h1>
-            <p class="tagline">Executive tier. Verified. Guaranteed balances.</p>
-        </section>
+        <section class="products-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">PNC Bank 🇺🇸</h2>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Browse available products and place your order</p>
+                </div>
+            </div>
 
-        <section class="products" id="products">
-            <div class="product-grid" id="product-grid">
-                <div class="loading-products">Loading…</div>
+            <div class="table-wrapper">
+                <table id="product-table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Status</th>
+                            <th>Type</th>
+                            <th>Includes</th>
+                            <th>Balance</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list">
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">Loading secure data...</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
+    </div>
 
-        <section class="trust-section">
-            <h2>Why $.com</h2>
-            <div class="trust-grid">
-                <div class="trust-item">Verified balances</div>
-                <div class="trust-item">Instant delivery</div>
-                <div class="trust-item">Crypto only</div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <p>&copy; 2026 $.com. Self-hosted. Zero dependencies.</p>
-        <p class="disclaimer">Fictional products for demonstration. No real data sold.</p>
+    <footer style="margin-top: 100px; border-top: 1px solid #1a1a1a; padding-top: 40px; text-align: center;">
+        <div class="container">
+            <p>QuantumShade &copy; 2026 | All Rights Reserved</p>
+        </div>
     </footer>
 
-    <script>
-      (function () {
-        function esc(s) {
-          return String(s ?? '').replace(/[&<>"']/g, function (c) {
-            return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] || c;
-          });
-        }
-        (async () => {
-          const grid = document.getElementById('product-grid');
-          try {
-            const res = await fetch('/api/products');
-            const products = await res.json();
-            if (!Array.isArray(products) || products.length === 0) {
-              grid.innerHTML = '<p class="no-products">No products. Add data/products.json</p>';
-              return;
-            }
-            grid.innerHTML = products.map(function (p) {
-              const img = String(p.img || 'product1.jpg').replace(/[^a-zA-Z0-9._-]/g, '');
-              return (
-                '<div class="product-card">' +
-                (p.tag ? '<span class="product-tag">' + esc(p.tag) + '</span>' : '') +
-                '<img src="./img/' + esc(img) + '" alt="' + esc(p.name) + '" loading="lazy" width="400" height="160">' +
-                '<h3>' + esc(p.name) + '</h3>' +
-                '<p class="product-desc">' + esc(p.desc) + '</p>' +
-                '<span class="price">$' + Number(p.price).toLocaleString() + '</span>' +
-                '<a href="pay.html?product=' + encodeURIComponent(p.name) + '&price=' + encodeURIComponent(p.price) + '" class="buy-btn">Buy now</a>' +
-                '</div>'
-              );
-            }).join('');
-          } catch (e) {
-            grid.innerHTML = '<p class="no-products">Failed to load products.</p>';
-          }
-        })();
-      })();
-    </script>
+    <script src="./js/products.js"></script>
 </body>
 </html>

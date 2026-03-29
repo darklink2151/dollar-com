@@ -1,5 +1,21 @@
 version: '3.8'
 services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=admin
+      - DB_PASSWORD=secretpassword
+      - DB_NAME=dollar_ledger
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+
   db:
     image: postgres:15-alpine
     environment:

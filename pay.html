@@ -3,47 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="$.com — Secure Crypto Payment.">
-    <title>Pay | $.com</title>
-    
-    <!-- Social Meta Tags -->
-    <meta property="og:title" content="Payment | $.com Executive Tier">
-    <meta property="og:description" content="Secure crypto payments for verified balance data. BTC, ETH, USDC accepted.">
-    <meta property="og:image" content="http://64.227.11.50/img/og-preview.jpg">
-    <meta property="twitter:card" content="summary_large_image">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="QuantumShade — Secure Crypto Payment for Financial Tools.">
+    <title>Pay | QuantumShade</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <header class="site-header">
-        <a href="index.html" class="logo"><img src="./img/logo.svg" alt="$.com" class="logo-img">$.com</a>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="download.html">Products</a>
-            <a href="pay.html">Pay</a>
-        </nav>
-    </header>
-
-    <main>
-        <section class="pay-section">
-            <h1>Pay</h1>
-            <p class="pay-intro">Send BTC, ETH, or USDC to the address below. Funds are credited to your account.</p>
-            <div class="order-summary" id="order-summary" style="display:none;"></div>
-            <div id="download-area" class="download-area" style="display:none;"></div>
-            <div id="crypto-addresses" class="crypto-addresses">
-                <div class="loading" id="loading">Loading…</div>
-                <div class="address-list" id="address-list" style="display:none;"></div>
-                <div class="error" id="error" style="display:none;"></div>
+    <div class="top-bar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="brand">QuantumShade</a>
+            <div class="user-status">
+                <div class="status-item"><span class="label">Balance:</span> <span class="value">$0.00</span></div>
+                <a href="#" class="topup-btn">Top Up</a>
+                <a href="#" class="status-item"><span class="value">Orders</span></a>
+                <div class="status-item"><span class="value">dirtbag</span></div>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 $.com. Self-hosted. Zero dependencies.</p>
-        <p class=REAL SHIT NO GAMES.</p>
+    <div class="container">
+        <nav class="nav-menu">
+            <a href="download.html?cat=canada" class="nav-link">CANADA BANKS 🇨🇦</a>
+            <a href="download.html?cat=usa" class="nav-link active">USA BANKS 🇺🇸</a>
+            <a href="download.html?cat=europe" class="nav-link">EUROPEAN BANKS 🇪🇺🌍</a>
+            <a href="#" class="nav-link">SHOPWITHSCRIP LOGS 🟦🛒</a>
+            <a href="#" class="nav-link">OTHER TOOLS ✒️🖋️</a>
+        </nav>
+
+        <main class="products-section">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Secure Payment</h2>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Send BTC, ETH, or USDC to the address below. Funds are credited to your account.</p>
+                </div>
+            </div>
+
+            <div style="background: var(--bg-dark); border: var(--border-thin); border-radius: 8px; padding: 40px; margin-top: 20px;">
+                <div class="order-summary" id="order-summary" style="display:none; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #222;"></div>
+                <div id="download-area" class="download-area" style="display:none; margin-bottom: 30px;"></div>
+                <div id="crypto-addresses" class="crypto-addresses">
+                    <div class="loading" id="loading" style="color: var(--quantum-gold);">Initializing secure gateway...</div>
+                    <div class="address-list" id="address-list" style="display:none; display: flex; flex-direction: column; gap: 30px;"></div>
+                    <div class="error" id="error" style="display:none; color: #f87171;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer style="margin-top: 100px; border-top: 1px solid #1a1a1a; padding-top: 40px; text-align: center;">
+        <div class="container">
+            <p>QuantumShade &copy; 2026 | All Rights Reserved</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
